@@ -13,20 +13,27 @@ import { ApiService } from "src/app/services/api.service";
 export class CompanyEditPage implements OnInit {
     company = new Company();
     edit = false;
+    idCompany: string;
 
     constructor(private apiSvc: ApiService,
         private router: Router,
         private route: ActivatedRoute) {}
 
     ngOnInit() {
-        this.getFilm(this.route.snapshot.paramMap.get('id'));
+        this.idCompany = this.route.snapshot.paramMap.get('id');
+        this.getCompany(this.idCompany);
+        
     }
 
-    getFilm(idCompany: string) {
+    getCompany(idCompany: string) {
         this.apiSvc.get(`api/Companies/${idCompany}`).subscribe(data => {
             this.company = data;
         });
     } 
+
+    goToEmployees() {
+        this.router.navigateByUrl(`companies/${this.idCompany}/employees`);
+    }
 
     editMode() {
         this.edit = true;

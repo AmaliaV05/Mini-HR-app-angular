@@ -1,0 +1,58 @@
+<div *ngIf="edit === false; else elseBlock">
+    <div>
+        <mat-card>
+            <mat-card-title>{{company.companyName}}</mat-card-title>
+            <mat-card-subtitle>Employee details</mat-card-subtitle>
+            <mat-card-content>
+                <mat-list>
+                    <mat-list-item>Name: {{person.name}}</mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>Surname: {{person.surname}}</mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>Social security number: {{person.ssn}}</mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>Birth date: {{person.birthDate}}</mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>Birth place: {{person.birthPlace}}</mat-list-item>
+                    <mat-divider></mat-divider>
+                </mat-list>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-stroked-button color="primary" (click)="goToEmployees()"> Back </button>
+                <button mat-stroked-button color="primary" (click)="editMode()"> Edit </button>
+                <button mat-stroked-button color="warn" (click)="deleteEmployee(company)"> Delete </button>
+            </mat-card-actions>
+          </mat-card>
+    </div>    
+</div>
+<ng-template #elseBlock>
+    <div>
+        <form>
+            <mat-form-field appearance="fill">
+                <mat-label>Name</mat-label>
+                <input matInput [(ngModel)]="person.name" name="name" required>
+            </mat-form-field> 
+            <mat-form-field appearance="fill">
+                <mat-label>Surname</mat-label>
+                <input matInput [(ngModel)]="person.surname" name="surname" required>
+            </mat-form-field>  
+            <mat-form-field appearance="fill">
+                <mat-label>Social security number</mat-label>
+                <input matInput [(ngModel)]="person.ssn" name="ssn" required>
+            </mat-form-field>       
+            <mat-form-field appearance="fill">
+                <mat-label>Birth date</mat-label>
+                <input matInput [matDatepicker]="picker" [(ngModel)]="person.birthDate" name="birthDate" required>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Birth place</mat-label>
+                <input matInput [(ngModel)]="person.birthPlace" name="birthPlace" required>
+            </mat-form-field>
+        </form>
+    </div>
+    <div>
+        <button mat-stroked-button color="primary" (click)="updateEmployee()"> Save </button>
+    </div>
+</ng-template>

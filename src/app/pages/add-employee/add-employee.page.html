@@ -1,0 +1,29 @@
+<div class="add-employee">
+    <form>
+        <mat-form-field appearance="fill">
+            <mat-label>Name</mat-label>
+            <input matInput [(ngModel)]="employee.name" name="name" required>
+        </mat-form-field> 
+        <mat-form-field appearance="fill">
+            <mat-label>Surname</mat-label>
+            <input matInput [(ngModel)]="employee.surname" name="surname" required>
+        </mat-form-field>  
+        <mat-form-field appearance="fill">
+            <mat-label>Social security number</mat-label>
+            <input matInput [(ngModel)]="employee.ssn" name="ssn" required>
+        </mat-form-field>       
+        <mat-form-field appearance="fill">
+            <mat-label>Birth date</mat-label>
+            <input matInput [matDatepicker]="picker" [(ngModel)]="employee.birthDate" name="birthDate" required>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Birth place</mat-label>
+            <input matInput [(ngModel)]="employee.birthPlace" name="birthPlace" required>
+        </mat-form-field>
+    </form>    
+</div>
+<div>
+    <button mat-stroked-button color="primary" (click)="addEmployee()"> Add </button>
+</div>

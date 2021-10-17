@@ -23,6 +23,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { CompanyAddPage } from './pages/add-company/add-company.page';
 import { FormsModule } from '@angular/forms';
 import { CompanyEditPage } from './pages/edit-company/edit-company.page';
+import { EmployeesPage } from './pages/employees/employees.page';
+import { EmployeeAddPage } from './pages/add-employee/add-employee.page';
+import { EmployeeEditPage } from './pages/edit-employee/edit-employee.page';
 
 @NgModule({
   declarations: [
@@ -31,6 +34,9 @@ import { CompanyEditPage } from './pages/edit-company/edit-company.page';
     CompaniesPage,
     CompanyAddPage,
     CompanyEditPage,
+    EmployeesPage,
+    EmployeeAddPage,
+    EmployeeEditPage,
     HomePage
   ],
   imports: [
