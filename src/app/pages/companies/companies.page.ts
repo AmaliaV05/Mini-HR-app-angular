@@ -12,7 +12,7 @@ import { ApiService } from 'src/app/services/api.service';
 
 export class CompaniesPage implements OnInit, OnDestroy {
     companies: Array<Company>;
-    columnsToDisplay = ['name'];
+    columnsToDisplay = ['position','name', 'fiscalCode', 'activity', 'action'];
 
     constructor(private apiSvc: ApiService, private router: Router) { }
     
@@ -25,17 +25,11 @@ export class CompaniesPage implements OnInit, OnDestroy {
     }
 
     goToAddCompany() {
-        this.router.navigateByUrl('companies/add');
-    }
-
-    deleteCompany(company: Company) {
-        this.apiSvc.put(`api/Companies/${company.id}/Change-Status`).subscribe(() => {
-          this.loadCompanies();
-        });
+      this.router.navigateByUrl('companies/add');
     }
     
     private loadCompanies() {
-      this.apiSvc.get('api/Companies').subscribe((response: Array<Company>) => {
+      this.apiSvc.get('api/Companies/Active-Status').subscribe((response: Array<Company>) => {
         this.companies = response;
       });
     }

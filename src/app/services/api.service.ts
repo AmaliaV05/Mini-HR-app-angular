@@ -8,32 +8,35 @@ export class ApiService {
     API_URL = 'https://localhost:5001/';
     constructor(private httpClient: HttpClient) {}
 
-    get(path: string): Observable<any> {
-        return this.httpClient.get(`${this.API_URL}${path}`);
-    }
+    get(path: string, params?: any): Observable<any> {
+        const headers = this.getHeaders();
+        return this.httpClient.get(`${this.API_URL}${path}`, {
+          headers
+        });
+      }
     
-    post(path: string, body = {}): Observable<any> {
+      post(path: string, body = {}): Observable<any> {
         const headers = this.getHeaders();
         return this.httpClient.post(
-            `${this.API_URL}${path}`,
-            JSON.stringify(body),
-            { headers }
+          `${this.API_URL}${path}`,
+          JSON.stringify(body),
+          { headers }
         );
-    }
-
-    put(path: string, body = {}): Observable<any> {
+      }
+    
+      put(path: string, body = {}): Observable<any> {
         const headers = this.getHeaders();
         return this.httpClient.put(`${this.API_URL}${path}`, JSON.stringify(body), {
-            headers,
+          headers,
         });
-    }
+      }
 
     private getHeaders() {
-    const headers = {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-    } as any;
-
-    return headers;
-    }
+        const headers = {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        } as any;
+    
+        return headers;
+      }
 }

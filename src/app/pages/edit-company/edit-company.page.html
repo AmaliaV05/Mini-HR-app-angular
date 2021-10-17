@@ -1,0 +1,74 @@
+<div *ngIf="edit === false; else elseBlock">
+    <div>
+        <mat-card>
+            <mat-card-title>{{company.companyName}}</mat-card-title>
+            <mat-card-subtitle>Details</mat-card-subtitle>
+            <mat-card-content>
+                <mat-list>
+                    <mat-list-item>Fiscal code: {{company.fiscalCode}}</mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>Registry number: {{company.registryNo}}</mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>EUID: {{company.euid}}</mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>Date of establishment: {{company.dateOfEstablishment}}</mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>NACE code: {{company.naceCode}}</mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>Activity: {{company.activity}}</mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>Activity description: {{company.activityDescription}}</mat-list-item>
+                    <mat-divider></mat-divider>
+                </mat-list>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-stroked-button color="primary" (click)="editMode()"> Edit </button>
+                <button mat-stroked-button color="warn" (click)="deleteCompany(company)"> Delete </button>
+            </mat-card-actions>
+          </mat-card>
+    </div>    
+</div>
+<ng-template #elseBlock>
+    <div>
+        <form>
+            <mat-form-field appearance="fill">
+                <mat-label>Company name</mat-label>
+                <input matInput [(ngModel)]="company.companyName" name="companyName" required>
+            </mat-form-field> 
+            <mat-form-field appearance="fill">
+                <mat-label>Fiscal code</mat-label>
+                <input matInput [(ngModel)]="company.fiscalCode" name="fiscalCode" required>
+            </mat-form-field>  
+            <mat-form-field appearance="fill">
+                <mat-label>Registry number</mat-label>
+                <input matInput [(ngModel)]="company.registryNo" name="registryNo" required>
+            </mat-form-field>       
+            <mat-form-field appearance="fill">
+                <mat-label>EUID</mat-label>
+                <input matInput [(ngModel)]="company.euid" name="euid" required>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Date of establishment</mat-label>
+                <input matInput [matDatepicker]="picker" [(ngModel)]="company.dateOfEstablishment" name="dateOfEstablishment" required>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>NACE code</mat-label>
+                <input matInput [(ngModel)]="company.naceCode" name="naceCode" required>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Activity</mat-label>
+                <input matInput [(ngModel)]="company.activity" name="activity" required>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Activity description</mat-label>
+                <textarea matInput [(ngModel)]="company.activityDescription" name="activityDescription" required>
+                </textarea>
+            </mat-form-field>
+        </form>
+    </div>
+    <div>
+        <button mat-stroked-button color="primary" (click)="updateCompany()"> Save </button>
+    </div>
+</ng-template>
