@@ -1,3 +1,15 @@
+<!-- <div>
+    <form>
+        <mat-form-field appearance="fill">
+            <mat-label>Start date</mat-label>
+            <input matInput [(ngModel)]="companyParams.minYearOfEstablishment" name="minYearOfEstablishment">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>End date</mat-label>
+            <input matInput [(ngModel)]="companyParams.maxYearOfEstablishment" name="maxYearOfEstablishment">
+        </mat-form-field>
+    </form>
+</div> -->
 <div class="list-company">
     <table mat-table [dataSource]="companies" class="mat-elevation-z8">
         <ng-container matColumnDef="position">
@@ -26,6 +38,13 @@
         <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
     </table>
 </div>
+<!-- <div *ngIf="pagination">
+    <mat-paginator [length]="3"
+        [pageSize]="5"
+        [pageSizeOptions]="[5, 10, 25]">
+    </mat-paginator> 
+</div> -->
 <div>
     <button mat-flat-button color="primary" [routerLink]="'/companies/add'"> Add new company </button>
-</div>        
+</div> 
+      

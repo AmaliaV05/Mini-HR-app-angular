@@ -1,0 +1,34 @@
+<div>
+    <form #registerForm="ngForm">
+        <mat-form-field appearance="fill">
+            <mat-label>First name</mat-label>
+            <input matInput [(ngModel)]="registerData.firstName" name="firstName" required>
+        </mat-form-field> 
+        <mat-form-field appearance="fill">
+            <mat-label>Last name</mat-label>
+            <input matInput [(ngModel)]="registerData.lastName" name="lastName" required>
+        </mat-form-field> 
+        <mat-form-field appearance="fill">
+            <mat-label>Username</mat-label>
+            <input matInput [(ngModel)]="registerData.userName" name="userName" required>
+        </mat-form-field> 
+        <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input matInput [(ngModel)]="registerData.email" name="email" required>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Phone number</mat-label>
+            <input matInput [(ngModel)]="registerData.phoneNumber" name="phoneNumber" required>
+        </mat-form-field> 
+        <mat-form-field appearance="fill">
+            <mat-label>Password</mat-label>
+            <input matInput [(ngModel)]="registerData.password" name="password" required>
+        </mat-form-field>
+    </form>
+    <div>
+        <button mat-stroked-button color="primary" (click)="register()" [disabled]="!registerForm.valid">Sign up</button>
+    </div>
+    <div>
+        Already registered? <a routerLink="/login">Sign in</a>
+    </div>
+</div>

@@ -40,7 +40,7 @@ export class EmployeeEditPage implements OnInit {
     } 
 
     goToEmployees() {
-        this.router.navigateByUrl(`companies/${this.idCompany}/employees`);
+        this.router.navigateByUrl(`Companies/${this.idCompany}/Employees`);
     }
 
     editMode() {
@@ -48,15 +48,15 @@ export class EmployeeEditPage implements OnInit {
     }
     
     updateEmployee() {
-        this.apiSvc.put(`api/Companies/${this.company.id}`, this.company).subscribe(() => {
-            this.router.navigateByUrl(`/companies/${this.company.id}/employee/${this.employee.id}`);
+        this.apiSvc.put(`api/Companies/${this.company.id}/Employee/${this.idEmployee}`, this.employee).subscribe(() => {
+            this.router.navigateByUrl(`/Companies/${this.company.id}/Employee/${this.employee.id}`);
         });
         this.edit = false;
     }
 
     deleteEmployee(company: Company) {
         this.apiSvc.put(`api/Companies/${company.id}/Employee-Change-Status-To-Inactive/${this.idEmployee}`).subscribe(() => {
-            this.router.navigateByUrl(`/companies/${company.id}/employees`);
+            this.router.navigateByUrl(`/Companies/${company.id}/Employees`);
         });
     }
 }

@@ -1,4 +1,6 @@
 import { Component } from "@angular/core";
+import { Router } from "@angular/router";
+import { AuthService } from "src/app/services/auth.service";
 
 @Component({
     selector: 'app-side-menu',
@@ -7,5 +9,11 @@ import { Component } from "@angular/core";
 })
 
 export class SideMenuComponent {
-
+    constructor(private authSvc: AuthService,
+        private router: Router) { }
+    
+    logOut() {
+        this.authSvc.removeToken();
+        this.router.navigateByUrl('/login');
+    }
 }

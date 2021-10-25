@@ -1,0 +1,18 @@
+<div>
+    <form #loginForm="ngForm">
+        <mat-form-field appearance="fill">
+            <mat-label>Username</mat-label>
+            <input matInput [(ngModel)]="loginData.username" name="username" required>
+        </mat-form-field> 
+        <mat-form-field appearance="fill">
+            <mat-label>Password</mat-label>
+            <input matInput [(ngModel)]="loginData.password" name="password" required>
+        </mat-form-field>  
+    </form>
+    <div>
+        <button mat-stroked-button color="primary" [disabled]="!loginForm.valid">Login</button>
+    </div>    
+    <div>
+        Not a user? <a routerLink="/register">Sign up</a>
+    </div>
+</div>
