@@ -12,6 +12,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatSortModule } from '@angular/material/sort';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -31,6 +33,7 @@ import { AuthService } from './services/auth.service';
 import { RegisterComponent } from './pages/register/register.page';
 import { CommonModule } from '@angular/common';
 import { LogoutComponent } from './pages/logout/logout.page';
+import { FileUploadModule } from 'ng2-file-upload';
 
 @NgModule({
   declarations: [
@@ -64,12 +67,16 @@ import { LogoutComponent } from './pages/logout/logout.page';
     MatCardModule,
     MatDividerModule,
     MatListModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatGridListModule,
+    MatSortModule,
+    FileUploadModule
   ],
   providers: [
     ApiService,
     AuthService
   ],
+  exports: [MatSortModule, FileUploadModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

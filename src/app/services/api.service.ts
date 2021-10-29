@@ -35,6 +35,14 @@ export class ApiService {
     });
   }
 
+  delete(path: string, params?: any): Observable<any> {
+    const headers = this.getHeaders();
+    return this.httpClient.delete(`${this.API_URL}${path}`, {
+      headers,
+      params: this.toHttpParams(params),
+    });
+  }
+
   private getHeaders() {
     const headers = {
       Accept: 'application/json',
@@ -57,10 +65,10 @@ export class ApiService {
   getCompanies(companyParams: CompanyParams) {
 
     let params = this.getPaginationHeaders(companyParams.pageNumber, companyParams.pageSize);
-    params = params.append('minimum year', companyParams.minYearOfEstablishment);
-    params = params.append('maximum year', companyParams.maxYearOfEstablishment);
+    params = params.append('minYear', companyParams.minYear);
+    params = params.append('maxYear', companyParams.maxYear);
 
-    return this.getPaginatedResult<Company[]>(this.API_URL + 'Companies/Active-Status', params);
+    return this.getPaginatedResult<Company[]>(this.API_URL + 'api/Companies/Active-Status', params);
   }
 
   private getPaginatedResult<T>(url, params) {

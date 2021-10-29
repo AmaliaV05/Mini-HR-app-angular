@@ -18,7 +18,7 @@
                     <mat-list-item>Activity: {{company.activity}}</mat-list-item>
                     <mat-divider></mat-divider>
                     <mat-list-item>Activity description: {{company.activityDescription}}</mat-list-item>
-                    <mat-divider></mat-divider>
+                    <mat-divider></mat-divider>                        
                 </mat-list>
             </mat-card-content>
             <mat-card-actions>
@@ -64,7 +64,8 @@
             </mat-form-field>
             <mat-form-field appearance="fill">
                 <mat-label>Activity description</mat-label>
-                <textarea matInput [(ngModel)]="company.activityDescription" name="activityDescription" required>
+                <textarea matInput [(ngModel)]="company.activityDescription" name="activityDescription" cdkTextareaAutosize
+                cdkAutosizeMinRows="3" required>
                 </textarea>
             </mat-form-field>
         </form>

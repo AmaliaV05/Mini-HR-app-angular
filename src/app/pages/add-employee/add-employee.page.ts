@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { Person } from "src/app/models/person.model";
+import { Employee } from "src/app/models/employee.model";
 import { ApiService } from "src/app/services/api.service";
 
 @Component({
@@ -11,7 +11,7 @@ import { ApiService } from "src/app/services/api.service";
 })
 
 export class EmployeeAddPage implements OnInit {
-    employee = new Person();
+    employee = new Employee();
     idCompany: string;
 
     constructor(private apiSvc: ApiService,
@@ -24,7 +24,13 @@ export class EmployeeAddPage implements OnInit {
 
     addEmployee() {
         this.apiSvc.post(`api/Companies/${this.idCompany}/Employee`, this.employee).subscribe(() => {
-            this.router.navigateByUrl(`/companies/${this.idCompany}/employees`);
+            //this.router.navigateByUrl(`/companies/${this.idCompany}/Employees`);
+        });
+    }
+
+    addPhoto() {
+        this.apiSvc.post(`api/Employees/${this.employee.id}/Add-Photo`).subscribe(() => {
+
         });
     }
 }

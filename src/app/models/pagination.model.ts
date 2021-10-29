@@ -2,13 +2,16 @@ import { Company } from "./company.model";
 
 export class CompanyParams {    
     pageNumber = 1;
-    pageSize = 5;
-    minYearOfEstablishment: number;
-    maxYearOfEstablishment: number;
+    pageSize = 10;
+    minYear = 1900;
+    maxYear = new Date().getFullYear();
+    companyName: string;
+    sortByName: string;
+    sortByDate: string;
   
     constructor(company: Company) {
-      this.minYearOfEstablishment;
-      this.maxYearOfEstablishment;
+      this.minYear;
+      this.maxYear;
     }
 }  
   
