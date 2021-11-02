@@ -67,6 +67,7 @@ export class ApiService {
     let params = this.getPaginationHeaders(companyParams.pageNumber, companyParams.pageSize);
     params = params.append('minYear', companyParams.minYear);
     params = params.append('maxYear', companyParams.maxYear);
+    params = params.append('companyName', companyParams.companyName);
 
     return this.getPaginatedResult<Company[]>(this.API_URL + 'api/Companies/Active-Status', params);
   }

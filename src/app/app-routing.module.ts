@@ -1,25 +1,25 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthorizeGuard } from './guard/auth.guard';
-import { CompanyAddPage } from './pages/add-company/add-company.page';
-import { EmployeeAddPage } from './pages/add-employee/add-employee.page';
-import { CompaniesPage } from './pages/companies/companies.page';
-import { CompanyEditPage } from './pages/edit-company/edit-company.page';
-import { EmployeeEditPage } from './pages/edit-employee/edit-employee.page';
-import { EmployeesPage } from './pages/employees/employees.page';
-import { LoginComponent } from './pages/login/login.page';
-import { RegisterComponent } from './pages/register/register.page';
+import { CompanyAddComponent } from './pages/companies/add-company/add-company.page';
+import { EmployeeAddComponent } from './pages/employees/add-employee/add-employee.page';
+import { CompaniesComponent } from './pages/companies/list-companies/companies.page';
+import { CompanyEditComponent } from './pages/companies/edit-company/edit-company.page';
+import { EmployeeEditComponent } from './pages/employees/edit-employee/edit-employee.page';
+import { EmployeesComponent } from './pages/employees/list-employees/employees.page';
+import { RegisterComponent } from './pages/authentication/register/register.page';
 
-const routes: Routes = [
-  { path: 'login', component: LoginComponent },  
-  { path: 'register', component: RegisterComponent },
-  { path: 'companies', component: CompaniesPage }, //, canActivate: [AuthorizeGuard], children: [] },
-  { path: 'companies/add', component: CompanyAddPage },
-  { path: 'companies/:id', component: CompanyEditPage },
-  { path: 'companies/:id/employee/add', component: EmployeeAddPage},
-  { path: 'companies/:id/employees', component: EmployeesPage },  
-  { path: 'companies/:id/employee/:idEmployee', component: EmployeeEditPage}, 
-  { path: '', redirectTo: 'login', pathMatch: 'full' }
+const routes: Routes = [ 
+  { path: '', component: RegisterComponent },
+  { path: '', runGuardsAndResolvers: 'always', canActivate: [AuthorizeGuard], 
+    children: [
+      { path: 'companies', component: CompaniesComponent },
+      { path: 'companies/add', component: CompanyAddComponent },
+      { path: 'companies/:id', component: CompanyEditComponent },
+      { path: 'companies/:id/employee/add', component: EmployeeAddComponent },
+      { path: 'companies/:id/employees', component: EmployeesComponent },  
+      { path: 'companies/:id/employee/:idEmployee', component: EmployeeEditComponent }
+    ] }
 ];
 
 @NgModule({

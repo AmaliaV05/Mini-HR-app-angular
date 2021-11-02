@@ -1,11 +1,30 @@
-export class LoginResponse {
-  username: string;
-  token: string;
-  expiration: string;
+export interface RegisterUserRequest {
+  firstName: string;
+  lastName: string;
+  userName: string;
+  email: string;
+  phoneNumber: string;
+  password: string;
 }
 
-export class RegisterResponse {
+export interface RegisterResponse {
   confirmationToken: string;
 }
 
-export const AUTH_TOKEN_LOCAL_STORAGE_KEY = 'token';
+export interface ConfirmUserRequest {
+  email: string;
+  phoneNumber: string;
+  confirmationToken: string;
+}
+
+export interface LoginResponse {
+  username: string;
+  token: string;
+  expiration: string;
+  roles: string[];
+}
+
+export interface LoginRequest {
+  username: string;
+  password: string;
+}

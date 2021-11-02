@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="confirmMode === false;else elseBlock">
     <form #registerForm="ngForm">
         <mat-form-field appearance="fill">
             <mat-label>First name</mat-label>
@@ -28,7 +28,20 @@
     <div>
         <button mat-stroked-button color="primary" (click)="register()" [disabled]="!registerForm.valid">Sign up</button>
     </div>
-    <div>
-        Already registered? <a routerLink="/login">Sign in</a>
-    </div>
 </div>
+<ng-template #elseBlock>
+    <form #confirmationForm="ngForm">
+        <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input matInput [(ngModel)]="confirmData.email" name="email" required>
+        </mat-form-field> 
+        <mat-form-field appearance="fill">
+            <mat-label>Phone number</mat-label>
+            <input matInput [(ngModel)]="confirmData.phoneNumber" name="phoneNumber" required>
+        </mat-form-field>      
+    </form>
+    <div>
+        <button mat-stroked-button color="primary" (click)="confirm()" [disabled]="!confirmationForm.valid">Confirm</button>
+        <p *ngIf="showMessage === true">Registration Complete!</p>
+    </div>
+</ng-template>

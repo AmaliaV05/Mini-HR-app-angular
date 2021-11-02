@@ -1,11 +1,7 @@
-import { HttpParams } from '@angular/common/http';
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { MatPaginator, MatPaginatorDefaultOptions } from '@angular/material/paginator';
+import { Component, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
 import { Company } from 'src/app/models/company.model';
 import { CompanyParams, Pagination } from 'src/app/models/pagination.model';
 import { ApiService } from 'src/app/services/api.service';
@@ -17,42 +13,51 @@ import { ApiService } from 'src/app/services/api.service';
     encapsulation: ViewEncapsulation.None
 })
 
-export class CompaniesPage implements AfterViewInit, OnInit, OnDestroy {
+export class CompaniesComponent implements OnInit {
   companies: Array<Company>;
   pagination: Pagination;
   companyParams: CompanyParams;
   company: Company;
+  totalItems: any;
+  currentPage: any;
   columnsToDisplay = ['position','name', 'fiscalCode', 'activity', 'action'];
-  dataSource = new MatTableDataSource<Company>();
+  dataSource: any;
 
-  //@ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  
+  @Input() fieldvalue = '';
   constructor(private apiSvc: ApiService, private router: Router) { 
-    this.companyParams = new CompanyParams(this.company)
+    this.companyParams = new CompanyParams(this.company);
   }
   
   ngOnInit() {
-      this.getCompanies();
-  }
-
-  ngAfterViewInit(): void {
-    this.dataSource.sort = this.sort;
-  }
-
-  ngOnDestroy() {
-
+      this.getCompanies();      
   }
 
   goToAddCompany() {
     this.router.navigateByUrl('companies/add');
   }
 
+  public handlePage(e: any) {
+    this.pagination.currentPage = e.pageIndex;    
+    this.companyParams.pageSize = e.pageSize;
+    this.iterator();  
+  }
+
   getCompanies() {
     this.apiSvc.getCompanies(this.companyParams).subscribe(response => {
+      this.dataSource = new MatTableDataSource<Company>(response.result);
       this.companies = response.result;
       this.pagination = response.pagination;
-      this.dataSource = new MatTableDataSource(response.result);
+      this.totalItems = response.pagination.totalItems;
+      this.currentPage = response.pagination.currentPage;
+      this.iterator();      
     })
+  }
+
+  private iterator() {
+    const end = (this.pagination.currentPage + 1) * this.companyParams.pageSize;
+    const start = this.pagination.currentPage * this.companyParams.pageSize;
+    const part = this.companies.slice(start, end);
+    this.dataSource = part;
   }
 }

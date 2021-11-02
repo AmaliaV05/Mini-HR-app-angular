@@ -10,7 +10,7 @@ import { ApiService } from "src/app/services/api.service";
     encapsulation: ViewEncapsulation.None
 })
 
-export class CompanyAddPage {
+export class CompanyAddComponent {
     company = new Company();
 
     constructor(private apiSvc: ApiService,

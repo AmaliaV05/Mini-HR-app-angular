@@ -10,7 +10,7 @@ import { ApiService } from "src/app/services/api.service";
     encapsulation: ViewEncapsulation.None
 })
 
-export class CompanyEditPage implements OnInit {
+export class CompanyEditComponent implements OnInit {
     company = new Company();
     edit = false;
     idCompany: string;

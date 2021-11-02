@@ -11,7 +11,7 @@ import { ApiService } from 'src/app/services/api.service';
     encapsulation: ViewEncapsulation.None
 })
 
-export class EmployeesPage implements OnInit, OnDestroy {
+export class EmployeesComponent implements OnInit, OnDestroy {
     companyWithEmployees: Company;
     employees: Employee[];
     columnsToDisplay = ['position','name', 'surname', 'ssn', 'action'];

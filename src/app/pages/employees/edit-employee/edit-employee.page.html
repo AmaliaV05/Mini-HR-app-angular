@@ -29,7 +29,12 @@
 <ng-template #elseBlock>
     <div>
         <form>
-            <img src={{photo?.url}}>
+            <img class="edit-photo" src={{photo?.url}}>
+            <div class="delete-photo" *ngIf="photo?.id; else uploadPhotoSection">
+                <button mat-raised-button color="warn" (click)="deletePhoto(employee.id)">
+                    <mat-icon>delete</mat-icon> Delete photo
+                </button>
+            </div>
             <mat-form-field appearance="fill">
                 <mat-label>Name</mat-label>
                 <input matInput [(ngModel)]="employee.name" name="name" required>
@@ -58,11 +63,7 @@
         <button mat-stroked-button color="primary" (click)="updateEmployee()"> Save </button>
     </div>
     
-    <div class="delete-photo" *ngIf="photo?.id; else uploadPhotoSection">
-        <button mat-raised-button color="warn" (click)="deletePhoto(employee.id)">
-            <mat-icon>delete</mat-icon> Delete
-        </button>
-    </div>
+    
     <ng-template #uploadPhotoSection>
         <div class="upload-photo"> 
             <div class="drop-photo"> 

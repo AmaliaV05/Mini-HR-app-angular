@@ -1,4 +1,4 @@
-form {
+  form {
     display: flex;
       flex-direction: column;
       align-items: flex-start;
@@ -10,12 +10,6 @@ form {
 
 .employee-card img {
   max-width: 50%;
-}
-
-img.img-thumbnail {
-  height: 100px;
-  min-width: 100px !important;
-  margin-bottom: 2px;
 }
 
 .nv-file-over {
@@ -30,4 +24,8 @@ input[type=file] {
   padding: 2em;
   width: 20%;
   border: solid 3px lightgray; 
+}
+
+.edit-photo {
+  max-width: 20%;
 }

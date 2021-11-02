@@ -5,7 +5,6 @@ import { Company } from "src/app/models/company.model";
 import { Employee } from "src/app/models/employee.model";
 import { Photo } from "src/app/models/photo.model";
 import { ApiService } from "src/app/services/api.service";
-import { environment } from "src/environments/environment";
 
 @Component({
     selector: 'app-edit-employee',
@@ -14,7 +13,7 @@ import { environment } from "src/environments/environment";
     encapsulation: ViewEncapsulation.None
 })
 
-export class EmployeeEditPage implements OnInit {
+export class EmployeeEditComponent implements OnInit {
     company = new Company();
     employee = new Employee();    
     edit = false;
@@ -24,7 +23,6 @@ export class EmployeeEditPage implements OnInit {
     photo = new Photo();
     uploader: FileUploader;
     hasBaseDropZoneOver = false;
-    //baseUrl = environment.apiUrl;
     baseUrl = 'https://localhost:5001/';
 
     constructor(private apiSvc: ApiService,
@@ -81,7 +79,6 @@ export class EmployeeEditPage implements OnInit {
     initializeUploader() {
         this.uploader = new FileUploader({
           url: this.baseUrl + `api/Employees/${this.idEmployee}/Add-Photo`,
-          //authToken: 'Bearer ' + this.user.token,
           isHTML5: true,
           allowedFileType: ['image'],
           removeAfterUpload: true,

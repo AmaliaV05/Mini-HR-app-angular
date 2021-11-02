@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router, UrlTree } from '@angular/router';
+import { CanActivate } from '@angular/router';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
 
 @Injectable({
@@ -8,11 +9,15 @@ import { AuthService } from '../services/auth.service';
   })
 
 export class AuthorizeGuard implements CanActivate {
-  constructor(private authSvc: AuthService, private router: Router) { }
+  constructor(private authSvc: AuthService) { }
   
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-    throw new Error('Method not implemented.');
+  canActivate(): Observable<boolean> {
+    return this.authSvc.currentUser$.pipe(
+      map(user => {
+        if (user) 
+        return true;
+        return false;
+      })
+    )
   }
-  
-  
 }

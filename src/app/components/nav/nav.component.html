@@ -1,0 +1,36 @@
+<mat-toolbar class="container" color="primary">
+    <span class="navbar-brand" routerLink='/companies' routerLinkActive='active'>Mini HR App</span>
+
+    <div class="navbar-nav">
+        <ng-container *ngIf="authSvc.currentUser$ | async">
+            <div class="nav-item">
+                <a class="nav-link" routerLink='/companies' routerLinkActive='active' >Companies</a>
+            </div>
+        </ng-container>
+    </div>
+
+    <div *ngIf="(authSvc.currentUser$ | async) as user">  
+        <div>Welcome {{user.username | titlecase}}</div>
+        <div>
+            <span class="dropdown-item" (click)="logout()" >Logout</span>
+        </div>
+    </div>
+
+    <form *ngIf="(authSvc.currentUser$ | async) === null" #loginForm="ngForm" (ngSubmit)="login()" 
+        autocomplete="off">
+        <mat-form-field appearance="fill">
+            <input matInput
+            name="username"
+            [(ngModel)]="loginData.username"
+            placeholder="Username">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <input matInput
+            name="password"
+            [(ngModel)]="loginData.password"
+            type="password" 
+            placeholder="Password">
+        </mat-form-field>
+        <button mat-raised-button class="btn" type="submit">Login</button>
+    </form>
+</mat-toolbar>
