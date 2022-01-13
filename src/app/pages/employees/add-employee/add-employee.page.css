@@ -1,0 +1,19 @@
+  form {
+    display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+  }
+
+  .nv-file-over {
+    border: dotted 3px red;
+  }
+  
+  input[type=file] {
+    color: transparent;
+  }
+  
+  .my-drop-zone { 
+    padding: 2em;
+    width: 20%;
+    border: solid 3px lightgray; 
+  }

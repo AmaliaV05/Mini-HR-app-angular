@@ -1,0 +1,121 @@
+<div *ngIf="edit === false; else elseBlock">
+    <div>
+        <mat-card class="employee-card">
+            <mat-card-title>{{company.companyName}}</mat-card-title>
+            <mat-card-subtitle>Employee details</mat-card-subtitle>
+            <img mat-card-image src={{photo?.url}}>
+            <mat-card-content>
+                <mat-list>                   
+                    <mat-list-item>Name: {{employee.name}}</mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>Surname: {{employee.surname}}</mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>Social security number: {{employee.ssn}}</mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>Birth date: {{employee.birthDate | date:'shortDate'}}</mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>Birth place: {{employee.birthPlace}}</mat-list-item>
+                    <mat-divider></mat-divider>
+                </mat-list>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-stroked-button color="primary" (click)="goToEmployees()"> Back </button>
+                <button mat-stroked-button color="primary" (click)="editMode()"> Edit </button>
+                <button mat-stroked-button color="warn" (click)="deleteEmployee(company)"> Delete </button>
+            </mat-card-actions>
+          </mat-card>
+    </div>    
+</div>
+<ng-template #elseBlock>
+    <div>
+        <form>
+            <img class="edit-photo" src={{photo?.url}}>
+            <div class="delete-photo" *ngIf="photo?.id; else uploadPhotoSection">
+                <button mat-raised-button color="warn" (click)="deletePhoto(employee.id)">
+                    <mat-icon>delete</mat-icon> Delete photo
+                </button>
+            </div>
+            <mat-form-field appearance="fill">
+                <mat-label>Name</mat-label>
+                <input matInput [(ngModel)]="employee.name" name="name" required>
+            </mat-form-field> 
+            <mat-form-field appearance="fill">
+                <mat-label>Surname</mat-label>
+                <input matInput [(ngModel)]="employee.surname" name="surname" required>
+            </mat-form-field>  
+            <mat-form-field appearance="fill">
+                <mat-label>Social security number</mat-label>
+                <input matInput [(ngModel)]="employee.ssn" name="ssn" required>
+            </mat-form-field>       
+            <mat-form-field appearance="fill">
+                <mat-label>Birth date</mat-label>
+                <input matInput [matDatepicker]="picker" [(ngModel)]="employee.birthDate" name="birthDate" required>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Birth place</mat-label>
+                <input matInput [(ngModel)]="employee.birthPlace" name="birthPlace" required>
+            </mat-form-field>
+        </form>
+    </div>
+    <div>
+        <button mat-stroked-button color="primary" (click)="updateEmployee()"> Save </button>
+    </div>
+    
+    
+    <ng-template #uploadPhotoSection>
+        <div class="upload-photo"> 
+            <div class="drop-photo"> 
+                <h3>Add photo</h3> 
+                <div ng2FileDrop
+                     [ngClass]="{'nv-file-over': hasBaseDropZoneOver}"
+                     (fileOver)="fileOverBase($event)"
+                     [uploader]="uploader"
+                     class="well my-drop-zone">
+                     <mat-icon>attach_file</mat-icon>
+                    Drop photo here
+                </div> 
+                    <input type="file" ng2FileSelect [uploader]="uploader" />                
+                </div> 
+            <div class="upload-queue" style="margin-bottom: 40px"  *ngIf="uploader?.queue?.length"> 
+                <h3>Upload queue</h3>
+                <p>Queue length: {{ uploader?.queue?.length }}</p> 
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th width="50%">Name</th>
+                        <th>Size</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let item of uploader.queue">
+                        <td><strong>{{ item?.file?.name }}</strong></td>
+                        <td *ngIf="uploader.options.isHTML5" nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>                    
+                    </tr>
+                    </tbody>
+                </table> 
+                <div>
+                    <div class="queue-progress">
+                        Queue progress:
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
+                        </div>
+                    </div>
+                    <button mat-raised-button color="primary"
+                            (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+                            <mat-icon>arrow_upward</mat-icon> Upload
+                    </button>
+                    <button mat-raised-button color="warn"
+                            (click)="uploader.cancelAll()" [disabled]="!uploader.isUploading">
+                            <mat-icon>cancel</mat-icon> Cancel
+                    </button>
+                    <button mat-raised-button color="accent"
+                            (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
+                            <mat-icon>remove_circle_outline</mat-icon> Remove
+                    </button>
+                </div> 
+            </div> 
+        </div>
+    </ng-template>
+</ng-template>

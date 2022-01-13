@@ -1,5 +1,4 @@
 import { Employee } from "./employee.model";
-import { Person } from "./person.model";
 
 export class Company {
     id: number;
@@ -11,6 +10,5 @@ export class Company {
     naceCode: string;
     activity: string;
     activityDescription: string;
-    employees: Employee[]; 
-    people: Person[];
+    employees: Employee[];
 }
