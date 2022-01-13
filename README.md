@@ -12,16 +12,17 @@
 * [Further help](#further-help)
 
 ## General info
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.1.1.
-This project is a HR application with authentication.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.1.1. <br />
+This project is a HR application with authentication. <br />
+[Backend project](https://github.com/AmaliaV05/Mini-HR-app)
 	
 ## Technologies
 Project is created with:
-* Angular version: 
-* Angular Material version:
+* Angular version: 12.1
+* Angular Material version: 12.2
 * HTML5
 * CSS3
-* Typescript version:
+* Typescript version: 4.3
 
 ## Features
 * Companies: search by title, filter by range of years, create, view paged list, view details, update, delete
